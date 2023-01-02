@@ -20,8 +20,15 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  const rect = {};
+  rect.width = width;
+  rect.height = height;
+  rect.getArea = () => {
+    const area = width * height;
+    return area;
+  };
+  return rect;
 }
 
 
@@ -35,8 +42,21 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  if (Array.isArray(obj)) {
+    return `[${obj}]`;
+  }
+  const keys = Object.keys(obj);
+  let JSONOut = '{';
+  for (let i = 0; i < keys.length; i += 1) {
+    if (i === keys.length - 1) {
+      JSONOut += `"${keys[i]}":${obj[keys[i]]}`;
+    } else {
+      JSONOut += `"${keys[i]}":${obj[keys[i]]},`;
+    }
+  }
+  JSONOut += '}';
+  return JSONOut;
 }
 
 
